@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.appName }}
+  labels:
+    app: {{ .Values.appName }}
+  annotations:
+    configmap.reloader.stakater.com/reload: {{ .Values.configmap.name }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.appName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.appName }}
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        volumeMounts:
+        - name: nginx-config
+          mountPath: /usr/share/nginx/html/index.html
+          subPath: index.html
+        resources:
+          limits:
+            memory: "20Mi"
+            cpu: "0.001"
+      volumes:
+      - name: nginx-config
+        configMap:
+          name: {{ .Values.configmap.name }}

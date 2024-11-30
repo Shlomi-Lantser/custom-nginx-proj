@@ -1,0 +1,8 @@
+appName: nginx-custom-index
+
+namespace: custom-nginx
+
+configmap:
+  name: nginx-custom-index-cm
+
+customHeader: "Welcome to Azure AKS!"
