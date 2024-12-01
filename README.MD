@@ -66,7 +66,7 @@ az aks get-credentials --resource-group <RESOURCE_GROUP> --name <CLUSTER_NAME>
 kubectl get pod -A
 ```
 
-### 3. Helm & Manifests deployment
+### 4. Helm & Manifests deployment
     For information on deploying used Helm charts and using the manifests, please refer to the [manifests README](./yamls/README.md)
 
 ## Monitoring and Alerting
