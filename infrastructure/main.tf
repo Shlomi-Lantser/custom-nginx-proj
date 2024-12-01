@@ -20,6 +20,13 @@ module "aks_virtual_network" {
   tags = {}
 }
 
+resource "azurerm_container_registry" "acr" {
+  name                = "acrshlomilabne001"
+  resource_group_name = azurerm_resource_group.aks_spoke_rg.name
+  location            = azurerm_resource_group.aks_spoke_rg.location
+  sku                 = "Basic"
+}
+
 
 module "aks" {
   source                             = "./modules/aks"
@@ -52,4 +59,12 @@ module "aks" {
 
   deploy_argo = true
   deploy_reloader = true
+}
+
+resource "azurerm_role_assignment" "acrpull_aks" {
+  scope                = azurerm_container_registry.acr.id
+  role_definition_name = "AcrPull"
+  principal_id         = module.aks.aks_identity
+
+  depends_on = [ module.aks , azurerm_container_registry.acr ]
 }
