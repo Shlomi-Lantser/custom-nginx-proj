@@ -67,7 +67,7 @@ kubectl get pod -A
 ```
 
 ### 4. Helm & Manifests deployment
-    For information on deploying used Helm charts and using the manifests, please refer to the [manifests README](./yamls/README.md)
+For information on deploying used Helm charts and using the manifests, please refer to the [manifests README](./yamls/README.md)
 
 ## Monitoring and Alerting
 
