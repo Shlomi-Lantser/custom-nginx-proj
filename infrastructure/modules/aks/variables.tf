@@ -15,6 +15,12 @@ variable "infrastructure_resource_group_name" {
   nullable = true
 }
 
+variable "deploy_reloader" {
+  description = "Deploy Stakater Reloader"
+  type        = bool
+  default     = false
+}
+
 variable "enable_private_cluster" {
     description = "Enable private cluster"
     type        = bool

@@ -13,6 +13,7 @@ This Terraform module provisions an Azure Kubernetes Service (AKS) cluster with 
 
 3. **Helm Chart Deployment**:
    - **ArgoCD**: Deploys the ArgoCD Helm chart with a configurable LoadBalancer service type.
+   - **Reloader**: Deploys the Reloader Helm chart.
 
 4. **Outputs**:
    - Provides sensitive kubeconfig information for connecting to the AKS cluster.
@@ -49,7 +50,7 @@ module "aks" {
   }
 
   deploy_argo        = true
-  deploy_arc_runners = true
+  deploy_reloader = true
 }
 ```
 
@@ -68,6 +69,7 @@ module "aks" {
 | `default_node_pool`        | Default node pool configuration.                                                                     | `object`    | N/A                  |
 | `node_pools`               | Additional node pools to be added to the cluster.                                                   | `map(object)` | `{}`                |
 | `deploy_argo`              | Whether to deploy ArgoCD.                                                                            | `bool`      | `false`              |
+| `deploy_reloader`              | Whether to deploy Reloader.                                                                            | `bool`      | `false`              |
 | `network_profile`          | Network profile for the AKS cluster. Includes plugin and policy.                                     | `object`    | `{"azure", "calico"}`|
 
 ---
@@ -89,7 +91,10 @@ To deploy ArgoCD, set `deploy_argo` to `true`. The module:
 - Creates the `argocd` namespace.
 - Deploys the ArgoCD Helm chart with a LoadBalancer service.
 
+### Reloader
 
+To deploy Reloader, set `deploy_reloader` to `true`. The module:
+- Deploys the Reloader Helm chart within the default namespace.
 
 ## Example Scenarios
 
@@ -134,6 +139,7 @@ module "aks" {
   }
 
   deploy_argo = true
+  deploy_reloader = true
 }
 ```
 
@@ -142,7 +148,6 @@ module "aks" {
 ## Notes
 
 - Ensure that the necessary Azure permissions are granted for Terraform to provision AKS and deploy Helm charts.
-- If deploying GitHub Actions Runners, the provided PAT must have the `repo` and `admin:org` scopes.
 - Secret rotation requires the Key Vault Secrets Provider feature to be enabled.
 
 --- 

@@ -10,7 +10,7 @@ spec:
   - name: my-pod-demo-rules
     rules:     
     - alert: ContainerHighCpuUtilization
-      expr: 100 * (sum(rate(container_cpu_usage_seconds_total{pod=~"nginx-custom-index-.+"}[5m])) by (pod) / sum(kube_pod_container_resource_limits{pod=~"nginx-custom-index-.+", resource="cpu"}) by (pod)) > 80
+      expr: 100 * (sum(rate(container_cpu_usage_seconds_total{pod=~"nginx-custom-index-.+"}[1m])) by (pod) / sum(kube_pod_container_resource_limits{pod=~"nginx-custom-index-.+", resource="cpu"}) by (pod)) > 80
       for: 30s
       labels:
         severity: warning

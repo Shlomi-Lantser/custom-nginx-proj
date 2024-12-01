@@ -10,6 +10,9 @@ prometheus:
 
 
 alertmanager:
+  alertmanagerSpec:
+    secrets:
+    - alertmanager-secrets
   config:
     global:
       resolve_timeout: 5m
@@ -26,10 +29,14 @@ alertmanager:
     receivers:
     - name: 'email-notifications'
       email_configs:
-      - to: shlomi.lant@gmail.com
-        from: shlomi.lant@gmail.com
+      - to: <SOME_EMAIL>
+        from: <SOME_EMAIL>
         smarthost: smtp.gmail.com:587
-        auth_username: shlomi.lant@gmail.com
-        auth_identity: shlomi.lant@gmail.com
-        auth_password: gqejavnartmtrjje
+        auth_username: <SOME_EMAIL>
+        auth_identity: <SOME_EMAIL>
+        auth_password: <SOME_PASS>
         send_resolved: true
+
+
+grafana:
+  enabled: false

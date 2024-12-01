@@ -17,16 +17,16 @@ spec:
         app: {{ .Values.appName }}
     spec:
       containers:
-      - name: nginx
-        image: nginx:latest
+      - name: {{ .Values.container.name }}
+        image: {{ .Values.container.image }}
         volumeMounts:
         - name: nginx-config
           mountPath: /usr/share/nginx/html/index.html
           subPath: index.html
         resources:
           limits:
-            memory: "20Mi"
-            cpu: "0.001"
+            memory: {{ .Values.container.resources.limits.memory }}
+            cpu: {{ .Values.container.resources.limits.cpu }}     
       volumes:
       - name: nginx-config
         configMap:

@@ -45,11 +45,11 @@ module "aks" {
     pool1 = {
       name           = "pool1"
       node_count     = 1
-      vm_size        = "Standard_D2_v2"
+      vm_size        = "Standard_B2s"
       vnet_subnet_id = module.aks_virtual_network.subnet_ids["aks-subnet"]
     }
   }
 
   deploy_argo = true
-
+  deploy_reloader = true
 }

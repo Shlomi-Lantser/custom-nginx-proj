@@ -30,7 +30,3 @@ output "kube_config" {
 
   sensitive = true
 }
-
-output "argo_password" {
-  value = helm_release.argocd_deployment.0.secret.0["argocd-initial-admin-secret"]
-}
