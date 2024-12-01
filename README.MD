@@ -8,10 +8,10 @@ This project provides a comprehensive Terraform module for deploying an Azure Ku
 - Optional Key Vault secret provider
 - ArgoCD deployment
 - Stakater Reloader integration
+- Prometheus
+- Alertmanager
 
 ## Terraform Module Configuration
-
-### Variables Overview
 
 Key configurable variables include:
 
