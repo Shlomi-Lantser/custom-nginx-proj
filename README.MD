@@ -71,7 +71,7 @@ az aks get-credentials --resource-group <RESOURCE_GROUP> --name <CLUSTER_NAME>
 kubectl get pod -A
 ```
 
-### 3. Helm & Manifests deployment
+### 4. Helm & Manifests deployment
     For information on deploying used Helm charts and using the manifests, please refer to the [manifests README](./manifests/README.md)
 
 ## Monitoring and Alerting
@@ -135,6 +135,8 @@ kubectl port-forward svc/argo-cd-argocd-server -n argocd 8080:443
   ```bash
     seq 1 10000000 | xargs -n 1 -P 1000 curl http://<YOUR_PUBLIC_LB_IP>/   
   ```
+- Nginx app
+  Go the to browser and try to access : http://<YOUR_PUBLIC_LB_IP>/
 
 ## Estimated Effort
 
