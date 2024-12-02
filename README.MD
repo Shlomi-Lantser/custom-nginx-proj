@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This project provides a comprehensive Terraform module for deploying an Azure Kubernetes Service (AKS) cluster with advanced features including:
+This project provides a project template for deploying an Azure Kubernetes Service (AKS) cluster with advanced features including:
 - Multiple node pool configurations
 - Network profile customization
 - Optional Key Vault secret provider
