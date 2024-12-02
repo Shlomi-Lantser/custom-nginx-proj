@@ -8,10 +8,10 @@ This project provides a comprehensive Terraform module for deploying an Azure Ku
 - Optional Key Vault secret provider
 - ArgoCD deployment
 - Stakater Reloader integration
-- Prometheus
-- Alertmanager
 
 ## Terraform Module Configuration
+
+### Variables Overview
 
 Key configurable variables include:
 
@@ -43,6 +43,9 @@ az ad sp create-for-rbac --name "AKSDeploymentSP" --role Contributor
 ### 2. Terraform Deployment
 
 ```bash
+# Change to the Terraform directory
+cd infrastructure
+
 # Initialize Terraform
 terraform init
 
@@ -66,8 +69,8 @@ az aks get-credentials --resource-group <RESOURCE_GROUP> --name <CLUSTER_NAME>
 kubectl get pod -A
 ```
 
-### 4. Helm & Manifests deployment
-For information on deploying used Helm charts and using the manifests, please refer to the [manifests README](./yamls/README.md)
+### 3. Helm & Manifests deployment
+    For information on deploying used Helm charts and using the manifests, please refer to the [manifests README](./manifests/README.md)
 
 ## Monitoring and Alerting
 
@@ -75,7 +78,7 @@ For information on deploying used Helm charts and using the manifests, please re
 
 ```bash
 # Port forward Prometheus
-kubectl port-forward -n monitoring svc/prometheus-kube-prometheus-prometheus 9090:9090
+kubectl port-forward -n monitoring svc/prom-kube-prometheus-stack-prometheus 9090:9090
 
 # Access Prometheus UI: http://localhost:9090
 ```
@@ -84,7 +87,7 @@ kubectl port-forward -n monitoring svc/prometheus-kube-prometheus-prometheus 909
 
 ```bash
 # Port forward Alertmanager
-kubectl port-forward -n monitoring svc/prometheus-kube-prometheus-alertmanager 9093:9093
+kubectl port-forward -n monitoring svc/prom-kube-prometheus-stack-alertmanager 9093:9093
 ```
 
 ## ArgoCD Configuration

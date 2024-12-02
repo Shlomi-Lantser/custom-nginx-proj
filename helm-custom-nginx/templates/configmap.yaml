@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.configmap.name }}
+  namespace: {{ .Values.namespace }}
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Azure AKS</title>
+    </head>
+    <body>
+      <h1>{{ .Values.configmap.customHeader }}</h1>
+      <img src="https://docs.microsoft.com/en-us/media/learn/not-found/learn-not-found-dark-mode.png?branch=main" alt="Azure Kubernetes Service" />
+    </body>
+    </html>

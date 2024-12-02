@@ -11,14 +11,9 @@ terraform {
   }
 }
 
-
-# data "azurerm_client_config" "current" {
-
-# }
-
 provider "azurerm" {
   features {}
-  subscription_id = <SUB_ID>
+  subscription_id = "c255c99a-58ba-4f6a-86c2-95d5e4710414"
 }
 
 provider "helm" {

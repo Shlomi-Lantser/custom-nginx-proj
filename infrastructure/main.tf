@@ -1,9 +1,10 @@
+# Resource group for AKS infrastructure.
 resource "azurerm_resource_group" "aks_spoke_rg" {
   name     = "rg-aks-shlomi-lab-ne-001"
   location = "northeurope"
 }
 
-
+# Virtual network module to define the AKS network.
 module "aks_virtual_network" {
   source                        = "./modules/virtual-network"
   virtual_network_name          = "vnet-aks-shlomi-lab-ne-001"
@@ -20,6 +21,7 @@ module "aks_virtual_network" {
   tags = {}
 }
 
+# Azure Container Registry for AKS.
 resource "azurerm_container_registry" "acr" {
   name                = "acrshlomilabne001"
   resource_group_name = azurerm_resource_group.aks_spoke_rg.name
@@ -27,7 +29,7 @@ resource "azurerm_container_registry" "acr" {
   sku                 = "Basic"
 }
 
-
+# AKS module for cluster deployment.
 module "aks" {
   source                             = "./modules/aks"
   location                           = azurerm_resource_group.aks_spoke_rg.location
@@ -57,14 +59,15 @@ module "aks" {
     }
   }
 
-  deploy_argo = true
+  deploy_argo    = true
   deploy_reloader = true
 }
 
+# Role assignment to allow AKS to pull images from ACR.
 resource "azurerm_role_assignment" "acrpull_aks" {
   scope                = azurerm_container_registry.acr.id
   role_definition_name = "AcrPull"
   principal_id         = module.aks.aks_identity
 
-  depends_on = [ module.aks , azurerm_container_registry.acr ]
+  depends_on = [module.aks, azurerm_container_registry.acr]
 }
