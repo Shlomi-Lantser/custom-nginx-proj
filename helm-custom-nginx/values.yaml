@@ -6,7 +6,7 @@ replicas: 1
 
 configmap:
   name: nginx-custom-index-cm
-  customHeader: "Welcome to Azure AKS!"
+  customHeader: "Welcome to Azure AKS!!"
 
 
 container:
